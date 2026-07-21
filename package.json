@@ -1,0 +1,7 @@
+{
+  "name": "go2cloud-website",
+  "version": "1.0.0",
+  "description": "Go2Cloud — Website + Blog (Eleventy + Decap CMS)",
+  "scripts": { "build": "eleventy", "serve": "eleventy --serve" },
+  "devDependencies": { "@11ty/eleventy": "^2.0.1" }
+}

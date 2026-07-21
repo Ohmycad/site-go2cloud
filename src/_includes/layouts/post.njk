@@ -1,0 +1,28 @@
+---
+layout: layouts/base.njk
+ogType: article
+headExtra: |
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BlogPosting","headline":"{{ title }}","datePublished":"{{ page.date | isoDate }}","author":{"@type":"Person","name":"{{ author or 'Équipe Go2Cloud' }}"},"publisher":{"@type":"Organization","name":"Go2Cloud","logo":{"@type":"ImageObject","url":"https://go2cloud.fr/assets/img/logo-go2cloud.png"}},"mainEntityOfPage":"https://go2cloud.fr{{ page.url }}"}
+  </script>
+---
+<article class="post">
+  <div class="container post__wrap">
+    <p class="post__back"><a href="/blog/">← Retour au blog</a></p>
+    <span class="post__kicker">{{ category or 'Blog' }}</span>
+    <h1 class="post__title">{{ title }}</h1>
+    <div class="post__meta">
+      <span>{{ page.date | dateFR }}</span><span>·</span><span>{{ author or 'Équipe Go2Cloud' }}</span>
+    </div>
+    {% if cover %}<img class="post__cover" src="{{ cover }}" alt="{{ title }}" loading="eager" />{% endif %}
+    <div class="post__body">
+      {{ content | safe }}
+    </div>
+    <div class="post__foot">
+      {% if category %}<a class="post__more" href="/blog/categorie/{{ category | slug }}/">Plus dans « {{ category }} »</a>{% endif %}
+      <a class="btn btn--primary" href="/#contact">Réserver 30 min
+        <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,38 @@
+# ============================================================
+#  Go2Cloud — Configuration du système de rédaction (Decap CMS)
+#  IMPORTANT : ci-dessous, mettre "repo" avec votre chemin GitHub (Owner/Repo).
+# ============================================================
+backend:
+  name: github
+  repo: vroux18/go2cloud   # <-- à vérifier/adapter (Owner/Repo)
+  branch: main
+
+locale: fr
+site_url: https://go2cloud.fr
+display_url: https://go2cloud.fr
+publish_mode: simple
+
+media_folder: "src/assets/img/blog"
+public_folder: "/assets/img/blog"
+
+collections:
+  - name: "blog"
+    label: "Articles du blog"
+    label_singular: "Article"
+    description: "Écrire un nouvel article ou modifier un article existant."
+    folder: "src/blog"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}}  —  {{category}}  ({{date}})"
+    sortable_fields: ["date", "title"]
+    fields:
+      - { label: "Titre", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", date_format: "DD/MM/YYYY", time_format: false, format: "YYYY-MM-DD" }
+      - label: "Catégorie"
+        name: "category"
+        widget: "select"
+        options: ["SOLIDWORKS", "3DEXPERIENCE", "Conseils & tutoriels", "Secteur & industrie", "Réseau Ohmycad"]
+      - { label: "Description courte", name: "excerpt", widget: "text", hint: "1–2 phrases. Apparaît dans la liste du blog et sur Google." }
+      - { label: "Image de couverture (optionnel)", name: "cover", widget: "image", required: false, media_folder: "/src/assets/img/blog", public_folder: "/assets/img/blog" }
+      - { label: "Auteur", name: "author", widget: "string", default: "Équipe Go2Cloud" }
+      - { label: "Contenu", name: "body", widget: "markdown" }

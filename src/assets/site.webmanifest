@@ -1,0 +1,22 @@
+{
+  "name": "Go2Cloud",
+  "short_name": "Go2Cloud",
+  "description": "Partenaire SOLIDWORKS & 3DEXPERIENCE en France — réseau Ohmycad.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FBFAF8",
+  "theme_color": "#FBFAF8",
+  "icons": [
+    {
+      "src": "/assets/img/logo-go2cloud.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/logo-go2cloud.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
