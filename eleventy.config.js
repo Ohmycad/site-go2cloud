@@ -13,7 +13,6 @@ module.exports = function (eleventyConfig) {
     "src/uploads",
     "src/css",
     "src/js",
-    "src/admin",
     "src/_headers",
     "src/robots.txt",
     "src/llms.txt",
