@@ -5,7 +5,7 @@ Mode d'emploi pour un agent IA (Claude Code, Cursor...) qui modifie ce site. Le 
 ## Le site
 - Site de Go2Cloud, membre du réseau Ohmycad. Langue : français.
 - Générateur : Eleventy 2 (`npm run build` → `_site/`, `npm run serve` pour prévisualiser en local).
-- Hébergement : Cloudflare Pages, projet relié à `Ohmycad/site-go2cloud`. **Chaque push sur `main` met le site en ligne en 1 à 2 minutes.** Adresse technique : https://site-go2cloud.pages.dev
+- Hébergement : GitHub Pages (dépôt public `Ohmycad/site-go2cloud`, workflow `.github/workflows/pages.yml`). **Chaque push sur `main` met le site en ligne en 1 à 2 minutes** (onglet Actions du dépôt pour suivre la publication).
 - Accueil : src/index.html (page unique, HTML écrit à la main).
 - Pages légales : src/mentions-legales.html et src/politique-confidentialite.html (servies sans .html).
 - Scripts : src/js/main.js (constante G2C_FORM), src/js/consent.js, src/js/lead-form.js.
@@ -35,7 +35,7 @@ L'article apparaît sur /blog/, dans sa catégorie et dans le sitemap automatiqu
 - **Ne pas toucher** au formulaire de contact (formulaire HubSpot `6609c6c1-7b2f-4979-bea1-279c0ed2e8ae`, qui notifie Antoine Allary, Sylvain Pourprix, Mathias Savigny), à `consent.js` (bandeau cookies, HubSpot ne se charge qu'après « Accepter ») ni à `lead-form.js`.
 - **Ne pas supprimer ni vider** les pages légales.
 - Pas d'ajout de traceur, pixel ou script tiers sans passer par le bandeau de consentement.
-- src/_headers contient une politique de sécurité (CSP) stricte : tout nouveau script ou service externe doit y être autorisé, sinon le navigateur le bloque.
+- Une politique de sécurité (CSP) stricte est déclarée dans une balise meta en tête de src/index.html, src/mentions-legales.html, src/politique-confidentialite.html et src/_includes/layouts/base.njk : tout nouveau script ou service externe doit y être autorisé dans ces 4 fichiers, sinon le navigateur le bloque.
 
 ## En cas de doute
 Ne rien publier et demander à Ohmycad (Victor Roux).

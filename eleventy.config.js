@@ -9,11 +9,11 @@ const slugify = (s) =>
 
 module.exports = function (eleventyConfig) {
   const passthrough = [
+    "src/.nojekyll",
     "src/assets",
     "src/uploads",
     "src/css",
     "src/js",
-    "src/_headers",
     "src/robots.txt",
     "src/llms.txt",
     "src/index.html",
