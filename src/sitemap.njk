@@ -1,0 +1,14 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://go2cloud.fr/</loc></url>
+  <url><loc>https://go2cloud.fr/blog/</loc></url>
+{%- for post in collections.post %}
+  <url><loc>https://go2cloud.fr{{ post.url }}</loc><lastmod>{{ post.date.toISOString().slice(0,10) }}</lastmod></url>
+{%- endfor %}
+  <url><loc>https://go2cloud.fr/mentions-legales.html</loc></url>
+  <url><loc>https://go2cloud.fr/politique-confidentialite.html</loc></url>
+</urlset>

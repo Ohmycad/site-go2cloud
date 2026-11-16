@@ -4,7 +4,7 @@
 # ============================================================
 backend:
   name: github
-  repo: vroux18/go2cloud   # <-- à vérifier/adapter (Owner/Repo)
+  repo: Ohmycad/site-go2cloud
   branch: main
 
 locale: fr

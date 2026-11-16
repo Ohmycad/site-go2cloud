@@ -16,6 +16,7 @@ module.exports = function (eleventyConfig) {
     "src/admin",
     "src/_headers",
     "src/robots.txt",
+    "src/llms.txt",
     "src/index.html",
     "src/mentions-legales.html",
     "src/politique-confidentialite.html",
