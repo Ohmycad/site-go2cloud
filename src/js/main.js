@@ -124,10 +124,11 @@
     });
   });
 
-  // ----- Contact form: mailto fallback -----
+  // ----- Contact form → HubSpot (repli mailto si l'envoi échoue) -----
+  const G2C_FORM = '6609c6c1-7b2f-4979-bea1-279c0ed2e8ae';
   const form = document.querySelector('#contact-form');
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const data = new FormData(form);
       const name = (data.get('name') || '').toString().trim();
@@ -136,29 +137,29 @@
       const phone = (data.get('phone') || '').toString().trim();
       const need = (data.get('need') || '').toString().trim();
       const msg = (data.get('message') || '').toString().trim();
+      if (!name) { form.querySelector('[name="name"]')?.focus(); return; }
+      if (!/.+@.+\..+/.test(email)) { form.querySelector('[name="email"]')?.focus(); return; }
 
-      const subject = encodeURIComponent(`Demande de démo Go2Cloud — ${name || 'Contact'}`);
-      const body = encodeURIComponent(
-        `Bonjour Go2Cloud,\n\n` +
-        `Je souhaite échanger 30 minutes au sujet de :\n${need || '—'}\n\n` +
-        `Mes coordonnées :\n` +
-        `• Nom : ${name}\n` +
-        `• Email : ${email}\n` +
-        `• Entreprise : ${company}\n` +
-        `• Téléphone : ${phone}\n\n` +
-        `Contexte :\n${msg}\n\n` +
-        `Merci,\n${name}`
-      );
-      window.location.href = `mailto:contact@go2cloud.fr?subject=${subject}&body=${body}`;
-
-      // Visual confirmation (kept simple, no toast lib)
       const btn = form.querySelector('button[type="submit"]');
-      if (btn) {
-        const original = btn.innerHTML;
-        btn.innerHTML = 'Ouverture de votre messagerie…';
-        btn.disabled = true;
-        setTimeout(() => { btn.innerHTML = original; btn.disabled = false; }, 4000);
+      const original = btn ? btn.innerHTML : '';
+      if (btn) { btn.disabled = true; btn.textContent = 'Envoi…'; }
+
+      const n = window.omcLead ? window.omcLead.splitName(name) : { firstname: name, lastname: '' };
+      const body = (need ? 'Sujet : ' + need + '\n' : '') + msg;
+      const ok = window.omcLead
+        ? await window.omcLead.submit(G2C_FORM, { firstname: n.firstname, lastname: n.lastname, email, company, phone, message: body })
+        : false;
+
+      if (ok) {
+        form.reset();
+        if (btn) btn.textContent = 'Merci, demande envoyée. Réponse sous 24 h ouvrées.';
+        setTimeout(() => { if (btn) { btn.innerHTML = original; btn.disabled = false; } }, 6000);
+        return;
       }
+      const subject = encodeURIComponent(`Demande de démo Go2Cloud — ${name}`);
+      const mail = encodeURIComponent(`Bonjour Go2Cloud,\n\nSujet : ${need || '—'}\n• Nom : ${name}\n• Email : ${email}\n• Entreprise : ${company}\n• Téléphone : ${phone}\n\n${msg}\n`);
+      window.location.href = `mailto:contact@go2cloud.fr?subject=${subject}&body=${mail}`;
+      if (btn) { btn.innerHTML = original; btn.disabled = false; }
     });
   }
 
